@@ -38,7 +38,8 @@ passport.use( new FacebookStratergy({
             if(user.length == 0) {
                 let fbuser = {
                     email: profile.emails[0].value,
-                    fbAccessToken: accessToken
+                    fbAccessToken: accessToken,
+                    isGuide: false
                 }
                 connectdb('guideApp_demo')
                     .then(db => db.collection('users').insertOne(fbuser))
@@ -68,7 +69,8 @@ passport.use(new GoogleStrategy({
             if(user.length == 0) {
                 let guser = {
                     email: profile.emails[0].value,
-                    gAccessToken: accessToken
+                    gAccessToken: accessToken,
+                    isGuide: false
                 }
                 connectdb('guideApp_demo')
                     .then(db => db.collection('users').insertOne(guser))

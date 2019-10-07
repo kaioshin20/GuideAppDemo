@@ -18,10 +18,30 @@ router.get('/signup', (req, res) => {
     res.render("signup")
 })
 
+router.get('/signup/guide', (req, res) => {
+    res.render("signupGuide")
+})
+
 router.post('/signup', (req, res) => {
     let nuser = {
         email: req.body.email,
-        password: req.body.password
+        password: req.body.password,
+        isGuide: false
+    }
+    connectdb('guideApp_demo')
+        .then(db => db.collection('users').insertOne(nuser))
+        .then(() => res.redirect('/'))
+        .catch(err => {
+            console.log(err)
+            res.send(err)
+        })
+})
+
+router.post('/signup/guide', (req, res) => {
+    let nuser = {
+        email: req.body.email,
+        password: req.body.password,
+        isGuide: true
     }
     connectdb('guideApp_demo')
         .then(db => db.collection('users').insertOne(nuser))

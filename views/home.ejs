@@ -5,13 +5,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Home</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <ul>
-        <li><a href="/authenticate/signup">Local Authentication Signup</a></li>
-        <li><a href="/authenticate/signin">Local Authentication Signin</a></li>
-        <li><a href="/authenticate/signin/google">Google Authentication</a></li>
-        <li><a href="/authenticate/signin/facebook">Facebook Authentication</a></li>
-    </ul>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">How do you wanna signup as ?</h4>
+                </div>
+                <div class="modal-body">
+                    <ul>
+                        <li><a href="/authenticate/signup">Tourist</a></li>
+                        <li><a href="/authenticate/signup/guide">Guide</a></li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div> 
+        </div>
+    </div>
+
+    <!-- Modal2 -->
+    <div class="modal fade" id="myModal2" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal2 content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Signin via</h4>
+                </div>
+                <div class="modal-body">
+                    <ul>
+                        <button class="btn"><a href="/authenticate/signin">Local Authentication</a></button> <br>
+                        <button class="btn"><a href="/authenticate/signin/google">Google Authentication</a></button> <br>
+                        <button class="btn"><a href="/authenticate/signin/facebook">Facebook Authentication</a></button>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div> 
+        </div>
+    </div>
+
+    <button class="btn" data-toggle="modal" data-target="#myModal">Signup</button>
+    <button class="btn" data-toggle="modal" data-target="#myModal2">Signin</button>
+
 </body>
 </html>
