@@ -1,17 +1,10 @@
 const express = require('express');
-const session=require('express-session');
 const passport=require('../stratergies');
 const router = express.Router();
 const {connectdb}=require('../database/db');
 
 
-router.use(session({
-    secret: 'omaeowa mo shindeiru',
-    resave: false,
-    saveUninitialized: true,
-}))
-router.use(passport.initialize())
-router.use(passport.session())
+
 
 
 router.get('/signup', (req, res) => {
@@ -31,31 +24,27 @@ router.post('/signup', (req, res) => {
     }
     connectdb('guideApp_demo')
         .then(db => db.collection('users').insertOne(nuser))
-        .then(() =>{
-            console.log('new user',nuser)
-            res.redirect( '/stream/'+nuser._id)
-        }
-        ) 
+        .then(() => res.redirect( '/stream/'+nuser._id)) 
         .catch(err => {
             console.log(err)
             res.send(err)
         })
 })
 
-// router.post('/signup/guide', (req, res) => {
-//     let nuser = {
-//         email: req.body.email,
-//         password: req.body.password,
-//         isGuide: true
-//     }
-//     connectdb('guideApp_demo')
-//         .then(db => db.collection('users').insertOne(nuser))
-//         .then(() => res.redirect('/'))
-//         .catch(err => {
-//             console.log(err)
-//             res.send(err)
-//         })
-// })
+router.post('/signup/guide', (req, res) => {
+    let nuser = {
+        email: req.body.email,
+        password: req.body.password,
+        isGuide: true
+    }
+    connectdb('guideApp_demo')
+        .then(db => db.collection('users').insertOne(nuser))
+        .then(() => res.redirect('/'))
+        .catch(err => {
+            console.log(err)
+            res.send(err)
+        })
+})
 
 router.get('/signin', (req, res) => {
     res.render("signin")

@@ -1,0 +1,4 @@
+fbid:'782623105528787'
+fbsec:'9bd69ca3799cce24f2524b5df83672af'
+googleid:'935476305418-1cfbbdsm1m638d5istgbjmguu12122sp.apps.googleusercontent.com'
+googlesec:'4c8H6xzqfDhOUkBsNY1UTHRo'

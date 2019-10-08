@@ -1,5 +1,7 @@
 const express=require('express');
 const svr=express();
+const session=require('express-session');
+const passport=require('passport')
 const bodyParser=require('body-parser')
 const cookieParser=require('cookie-parser')
 const authRouter=require('./routes/authRoute')
@@ -7,13 +9,19 @@ const streamRouter=require('./routes/streamRoute')
 const path=require('path')
 const startRouter=require('./routes/startRoute')
 
+svr.use(session({
+    secret: 'omaeowa mo shindeiru',
+    resave: false,
+    saveUninitialized: true,
+}))
+svr.use(passport.initialize())
+svr.use(passport.session())
 
 svr.set('view engine', 'ejs')
 svr.use(express.urlencoded({extended: true}))
 svr.use(express.json())
 
 svr.use(bodyParser.urlencoded({extended:false}));
-svr.use(express.urlencoded({ extended: false }));
 svr.use(cookieParser());
 svr.use(express.static(path.join(__dirname, 'public')));
 
@@ -30,6 +38,7 @@ const SERVER_PORT = process.env.PORT || 3000
 // }
 
 svr.get('/', (req, res) => {
+    console.log(req.user[0]._id);
     res.render("home")
 })
 
