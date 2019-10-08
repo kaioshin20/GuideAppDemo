@@ -23,6 +23,7 @@ router.get('/signup/guide', (req, res) => {
 })
 
 router.post('/signup', (req, res) => {
+    console.log("signup body",req.body)
     let nuser = {
         email: req.body.email,
         password: req.body.password,
@@ -30,27 +31,31 @@ router.post('/signup', (req, res) => {
     }
     connectdb('guideApp_demo')
         .then(db => db.collection('users').insertOne(nuser))
-        .then(() => res.redirect('/'))
+        .then(() =>{
+            console.log('new user',nuser)
+            res.redirect( '/stream/'+nuser._id)
+        }
+        ) 
         .catch(err => {
             console.log(err)
             res.send(err)
         })
 })
 
-router.post('/signup/guide', (req, res) => {
-    let nuser = {
-        email: req.body.email,
-        password: req.body.password,
-        isGuide: true
-    }
-    connectdb('guideApp_demo')
-        .then(db => db.collection('users').insertOne(nuser))
-        .then(() => res.redirect('/'))
-        .catch(err => {
-            console.log(err)
-            res.send(err)
-        })
-})
+// router.post('/signup/guide', (req, res) => {
+//     let nuser = {
+//         email: req.body.email,
+//         password: req.body.password,
+//         isGuide: true
+//     }
+//     connectdb('guideApp_demo')
+//         .then(db => db.collection('users').insertOne(nuser))
+//         .then(() => res.redirect('/'))
+//         .catch(err => {
+//             console.log(err)
+//             res.send(err)
+//         })
+// })
 
 router.get('/signin', (req, res) => {
     res.render("signin")
